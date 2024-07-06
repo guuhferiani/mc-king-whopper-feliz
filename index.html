@@ -227,7 +227,7 @@
                 etapa: 1,
                 inputNome: '',
                 inputEndereco: '',
-
+                novoPedidoAssincrono: null
             },
 
             computed: { // propriedades computadas // reativos
@@ -291,13 +291,31 @@
                 confirmarPedido() {
                     if(this.inputNome && this.inputEndereco) {
                         this.etapa = 3
+
+                        this.novoPedidoAssincrono = setTimeout(() => this.novoPedido(), 5000)
+
                     } else {
                         alert ('Você precisa informar o seu nome e endereço')
                     }
+                },
+                novoPedido() {
+                    this.etapa = 1
+
+                    this.inputTipoPao = ''
+                    this.inputSalada = []
+                    this.inputMolhos = []
+                    this.inputHamburguer = '' 
+                    this.inputNome = ''
+                    this.inputEndereco = '' 
                 }
             },
-
-
+            watch: {
+                etapa(novoValor) {
+                    if(novoValor == 1) {
+                        clearTimeout(this.novoPedidoAssincrono)
+                    }
+                }
+            }
         })
     </script>
 
