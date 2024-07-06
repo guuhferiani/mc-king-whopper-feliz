@@ -186,6 +186,30 @@
                     </div>
                 </div>  <!-- fim col md 6 -->
 
+                <div class="col-md-6" v-if="etapa == 3">
+                    <!-- Pedido Confirmado -->
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    PEDIDO CONFIRMADO
+                                </div>
+                                <div class="card-body">
+                                    <p>Agora é só aguardar 10 minutinhos!</p>
+                                    <p>Vamos chamar vc em breve.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repetir pedido -->
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-between">
+                            <button type="button" class="btn btn-primary" @click="etapa = 1"> Repetir Pedido </button>
+
+                            <button type="button" class="btn btn-success" @click="novoPedido()"> Novo Pedido </button>
+                        </div>
+                    </div>
+                </div>
             </div> <!-- fim ROW -->
         </div> <!-- FIM APP -->
     </div> <!-- FIM container -->
@@ -201,6 +225,8 @@
                 inputMolhos: [], //arrays
                 inputHamburguer: '',
                 etapa: 1,
+                inputNome: '',
+                inputEndereco: '',
 
             },
 
@@ -260,6 +286,13 @@
                         this.etapa = 2 // avança p/ etapa Fechar pedido
                     } else {
                         alert('Você precisa selecionar no minimo um pão e uma carne')
+                    }
+                },
+                confirmarPedido() {
+                    if(this.inputNome && this.inputEndereco) {
+                        this.etapa = 3
+                    } else {
+                        alert ('Você precisa informar o seu nome e endereço')
                     }
                 }
             },
